@@ -1,38 +1,30 @@
 pipeline {
   agent any
-
-  stages {
-   
-   stage('clone project') {
+   stages {
+     stage('clone project') {
       steps {
            git branch:'master' , url:'https://github.com/sivalakkireddy9/Amazon-Ecom'
        }
    }
-
-   stage('clean') {
+    stage('clean') {
       steps {
            sh 'mvn clean'
        }
    }
-
    stage('compile') {
       steps {
            sh 'mvn compile'
        }
    }
-
-   stage('test') {
+  stage('test') {
       steps {
            sh 'mvn test'
        }
    }
-
-   stage('build') {
+  stage('build') {
       steps {
            sh 'mvn clean install'
        }
    }
-   
-}
-
+ }
 }
