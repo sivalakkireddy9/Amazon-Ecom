@@ -1,20 +1,21 @@
 pipeline {
-       agent any
-               stages {
-                   stage('clone project') {
-                             steps {
-                                git branch:'master' ,
-                                url:'https://github.com/sivalakkireddy9/Amazon-Ecom'
-                                    }
-                                }
-                
-               stage('build') {
-                                   steps {
-                                       sh 'mvn clean install'
-                                           }
-                                     }
-                     }
-      post {
+    agent any
+
+    stages {
+        stage('clone project') {
+            steps {
+                git branch: 'master', url: 'https://github.com/sivalakkireddy9/Amazon-Ecom'
+            }
+        }
+
+        stage('build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+    }
+
+    post {
         success {
             emailext(
                 subject: "Build Success: ${currentBuild.fullDisplayName}",
@@ -30,7 +31,4 @@ pipeline {
             )
         }
     }
-
-  
-    }
-     
+}
